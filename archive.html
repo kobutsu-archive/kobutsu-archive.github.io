@@ -8,13 +8,11 @@
 </head>
 
 <body>
-  <!-- ヘッダー -->
   <header>
     <p>物品管理・流通情報</p>
     <h1>古物流通公社</h1>
   </header>
 
-  <!-- ナビゲーション -->
   <nav aria-label="メインナビゲーション">
     <a href="index.html">HOME</a>
     <a href="about.html">ABOUT</a>
@@ -23,18 +21,27 @@
     <a href="contact.html">CONTACT</a>
   </nav>
 
-  <!-- メインコンテンツ -->
-  <main>
+  <main class="archive-main">
     <div class="page-heading">
       <p>ITEM INFORMATION SYSTEM</p>
-      <h2>物品照会</h2>
+      <h2>物品照会システム</h2>
     </div>
 
-    <!-- シリアルコード入力 -->
-    <h3>シリアルコード入力</h3>
-    <p>物品に付属するシリアルコードを入力してください。</p>
+    <div class="archive-title">
+      <div>
+        <p class="archive-label">SERIAL CODE SEARCH</p>
+        <h3>シリアルコード照会</h3>
+      </div>
+      <span class="archive-number">SEARCH No. 001</span>
+    </div>
 
-    <form id="serial-form">
+    <p class="archive-description">
+      照会対象物品のシリアルコードを入力してください。
+    </p>
+
+    <form id="serial-form" class="serial-form">
+      <label class="serial-label">SERIAL CODE</label>
+
       <div class="serial-inputs">
         <input
           type="text"
@@ -81,19 +88,33 @@
         >
       </div>
 
-      <button type="submit">照会する</button>
+      <p class="serial-format">
+        分類記号3文字 ＋ 個別番号12桁
+      </p>
+
+      <button type="submit">
+        照会する <span>→</span>
+      </button>
+
       <p id="serial-message" aria-live="polite"></p>
     </form>
+
+    <div class="archive-notice">
+      <span>INFORMATION</span>
+      <p>
+        シリアルコードは対象物品に付属する記録をご確認ください。
+        入力内容をご確認のうえ、照会を実行してください。
+      </p>
+    </div>
   </main>
 
-  <!-- フッター -->
   <footer>
     <div>Created by ogu²</div>
     <div class="fiction-note">This is a fictional project.</div>
   </footer>
 
   <script>
-    // ナビゲーション制御
+    // ナビゲーション
     const nav = document.querySelector("nav");
     const links = [...nav.querySelectorAll("a")];
 
@@ -106,7 +127,6 @@
 
     const currentIndex = foundIndex >= 0 ? foundIndex : 0;
 
-    // 現在のページを設定
     links.forEach((link, index) => {
       const isCurrentPage = index === currentIndex;
 
@@ -119,21 +139,16 @@
       }
     });
 
-    // 下線の位置を変更
     function highlightLink(index) {
       nav.style.setProperty("--active-index", index);
-      nav.classList.add("is-highlighting");
     }
 
-    // 現在のページの位置に戻す
     function resetHighlight() {
       nav.style.setProperty("--active-index", currentIndex);
-      nav.classList.remove("is-highlighting");
     }
 
     resetHighlight();
 
-    // マウス・キーボード操作
     links.forEach((link, index) => {
       link.addEventListener("mouseenter", () => {
         highlightLink(index);
@@ -152,7 +167,7 @@
       }
     });
 
-    // シリアルコード入力制御
+    // シリアルコード入力
     const form = document.getElementById("serial-form");
     const parts = [...document.querySelectorAll(".serial-part")];
     const message = document.getElementById("serial-message");
@@ -162,24 +177,27 @@
         if (index === 0) {
           input.value = input.value
             .replace(/[^a-zA-Z]/g, "")
-            .toUpperCase();
+            .toUpperCase()
+            .slice(0, 3);
         } else {
-          input.value = input.value.replace(/\D/g, "");
+          input.value = input.value
+            .replace(/\D/g, "")
+            .slice(0, 4);
         }
 
-        // 入力が完了したら次の欄へ
+        message.textContent = "";
+
+        // 入力欄が埋まったら次へ移動
         if (
           input.value.length === input.maxLength &&
           index < parts.length - 1
         ) {
           parts[index + 1].focus();
         }
-
-        message.textContent = "";
       });
 
-      // 空欄でBackspaceを押すと前の欄へ
       input.addEventListener("keydown", event => {
+        // 空欄でBackspaceを押すと前へ移動
         if (
           event.key === "Backspace" &&
           input.value === "" &&
@@ -187,14 +205,28 @@
         ) {
           parts[index - 1].focus();
         }
+
+        // 左右キーで入力欄を切り替え
+        if (event.key === "ArrowLeft" && index > 0) {
+          parts[index - 1].focus();
+        }
+
+        if (
+          event.key === "ArrowRight" &&
+          index < parts.length - 1
+        ) {
+          parts[index + 1].focus();
+        }
       });
     });
 
-    // 仮の照会処理
+    // 照会処理（現在は仮動作）
     form.addEventListener("submit", event => {
       event.preventDefault();
 
-      const code = parts.map(input => input.value).join("-");
+      const code = parts
+        .map(input => input.value)
+        .join("-");
 
       message.textContent = "照会システム未接続：" + code;
     });

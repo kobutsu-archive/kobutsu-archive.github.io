@@ -1,47 +1,44 @@
-
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  color: #292f36;
   background: #f5f5f2;
-  font-family: Arial, "Noto Sans JP", sans-serif;
+  color: #333b42;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
   line-height: 1.8;
 }
 
-/* ヘッダー */
 header {
-  padding: 30px 8%;
-  color: white;
+  padding: 28px 6% 24px;
   background: #263b50;
+  color: #fff;
+}
+
+header p {
+  margin: 0 0 4px;
+  color: #c7d0d9;
+  font-size: 12px;
+  letter-spacing: 0.12em;
 }
 
 header h1 {
   margin: 0;
-  font-size: 25px;
+  font-size: 28px;
   font-weight: 500;
   letter-spacing: 0.08em;
-}
-
-header p {
-  margin: 4px 0 0;
-  color: #d4dce4;
-  font-size: 12px;
-  letter-spacing: 0.12em;
 }
 
 /* ナビゲーション */
 nav {
   --active-index: 0;
-
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   width: 100%;
   padding: 0 2%;
-  background: white;
+  background: #fff;
   border-bottom: 1px solid #ddd;
 }
 
@@ -49,22 +46,16 @@ nav a {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 0;
-  height: 54px;
-  padding: 0;
-  color: #414b55;
+  min-height: 54px;
+  color: #737b82;
+  font-size: 12px;
+  letter-spacing: 0.08em;
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  text-align: center;
-  white-space: nowrap;
-  outline-offset: -3px;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 
-/* マウスを乗せたとき */
-nav a:hover {
+nav a:hover,
+nav a:focus-visible {
   color: #263b50;
 }
 
@@ -73,7 +64,6 @@ nav a.active {
   font-weight: 700;
 }
 
-/* スライドする下線 */
 nav::after {
   content: "";
   position: absolute;
@@ -87,186 +77,266 @@ nav::after {
   pointer-events: none;
 }
 
-/* キーボード操作時のフォーカス */
-nav a:focus-visible {
-  outline: 2px solid #d1a85c;
-}
-
 /* メインコンテンツ */
 main {
-  max-width: 900px;
-  margin: 38px auto;
-  padding: 0 20px;
+  width: 88%;
+  max-width: 1100px;
+  min-height: 55vh;
+  margin: 0 auto;
+  padding: 48px 0 64px;
 }
 
 .page-heading {
-  margin-bottom: 28px;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d5d9dc;
 }
 
 .page-heading p {
-  margin: 0;
+  margin: 0 0 6px;
   color: #737b82;
   font-size: 11px;
   letter-spacing: 0.16em;
 }
 
 .page-heading h2 {
-  margin: 3px 0 0;
-  font-size: 23px;
+  margin: 0;
+  color: #263b50;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+h3 {
+  color: #263b50;
+  font-size: 18px;
   font-weight: 500;
 }
 
-/* セクション */
 section {
-  margin-bottom: 24px;
-  padding: 24px;
-  background: white;
-  border: 1px solid #deded9;
+  margin: 32px 0;
 }
 
 section h3 {
-  margin-top: 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  font-size: 17px;
-  font-weight: 500;
+  margin-bottom: 12px;
 }
 
-a {
-  color: #345a7b;
-}
-
-.notice-date {
-  color: #777;
-  font-size: 12px;
+section p {
+  font-size: 14px;
 }
 
 /* フッター */
 footer {
-  margin-top: 60px;
-  padding: 24px;
-  border-top: 1px solid #ddd;
-  color: #686868;
-  font-size: 12px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 6%;
+  background: #263b50;
+  color: #d5dce3;
+  font-size: 11px;
 }
 
 .fiction-note {
-  margin-top: 2px;
-  color: #888;
+  color: #aebbc7;
+}
+
+/* ARCHIVE：物品照会システム */
+.archive-main {
+  max-width: 760px;
+}
+
+.archive-title {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 36px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #cfd3d5;
+}
+
+.archive-label {
+  margin: 0 0 4px;
+  color: #737b82;
   font-size: 10px;
+  letter-spacing: 0.14em;
 }
 
-.item-info {
+.archive-title h3 {
+  margin: 0;
+  color: #263b50;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.archive-number {
+  color: #737b82;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.archive-description {
+  margin: 24px 0 14px;
+  font-size: 14px;
+}
+
+.serial-form {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #d8dcd9;
+  border-radius: 3px;
+}
+
+.serial-label {
+  display: block;
+  margin-bottom: 12px;
+  color: #737b82;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.serial-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.serial-part {
+  width: 100%;
+  min-width: 0;
+  height: 64px;
+  padding: 8px 2px;
+  border: 1px solid #c5cbd0;
+  border-radius: 2px;
+  background: #fff;
+  color: #263b50;
+  font-family: monospace;
+  font-size: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  caret-color: transparent;
+  transition: border-color 0.2s ease;
+}
+
+.serial-part::placeholder {
+  color: #a0a8ae;
+  opacity: 1;
+}
+
+.serial-part:focus {
+  outline: 2px solid #263b50;
+  outline-offset: 1px;
+  border-color: #263b50;
+}
+
+.serial-format {
+  margin: 12px 0 22px;
+  color: #737b82;
+  font-size: 11px;
+}
+
+#serial-form button {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 2px;
+  background: #263b50;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#serial-form button span {
+  margin-left: 8px;
+}
+
+#serial-form button:hover {
+  background: #354e67;
+}
+
+#serial-message {
+  margin: 12px 0 0;
   font-size: 13px;
-  line-height: 1.5;
 }
 
-/* スマートフォン用 */
-@media (max-width: 520px) {
+.archive-notice {
+  margin-top: 22px;
+  padding: 14px 16px;
+  border-left: 3px solid #aeb8c0;
+  background: #eceeea;
+}
+
+.archive-notice span {
+  color: #52677a;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.archive-notice p {
+  margin: 5px 0 0;
+  color: #5c646a;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* スマートフォン */
+@media (max-width: 600px) {
+  header {
+    padding: 22px 5%;
+  }
+
+  header h1 {
+    font-size: 23px;
+  }
+
+  nav {
+    padding: 0 1%;
+  }
+
   nav a {
-    height: 46px;
-    font-size: 12px;
+    min-height: 48px;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  nav::after {
+    left: 1%;
+    width: 19.6%;
   }
 
   main {
-    margin-top: 28px;
+    width: 90%;
+    padding: 32px 0 48px;
   }
 
-  section {
-    padding: 18px;
+  .page-heading h2 {
+    font-size: 23px;
   }
-}
 
-/* シリアルコード入力フォーム */
-.serial-inputs {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 10px;
-  margin: 24px 0;
-}
+  .archive-title {
+    align-items: start;
+    flex-direction: column;
+    gap: 6px;
+  }
 
-.serial-part {
-  width: 100%;
-  min-width: 0;
-  height: 58px;
-  padding: 8px 4px;
-  border: 1px solid #b8c0c7;
-  border-radius: 3px;
-  background: #fff;
-  color: #263b50;
-  font-family: monospace;
-  font-size: 20px;
-  text-align: center;
-  text-transform: uppercase;
-}
+  .serial-form {
+    padding: 16px 12px;
+  }
 
-.serial-part:focus {
-  outline: 2px solid #263b50;
-  outline-offset: 1px;
-  border-color: #263b50;
-}
+  .serial-inputs {
+    gap: 6px;
+  }
 
-#serial-form button {
-  min-width: 160px;
-  padding: 12px 24px;
-  border: none;
-  background: #263b50;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-}
+  .serial-part {
+    height: 54px;
+    font-size: 16px;
+  }
 
-#serial-form button:hover {
-  background: #354e67;
-}
-
-#serial-message {
-  font-size: 13px;
-}
-
-.serial-inputs {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 10px;
-  margin: 24px 0;
-}
-
-.serial-part {
-  width: 100%;
-  min-width: 0;
-  height: 58px;
-  padding: 8px 4px;
-  border: 1px solid #b8c0c7;
-  border-radius: 3px;
-  background: #fff;
-  color: #263b50;
-  font-family: monospace;
-  font-size: 20px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.serial-part:focus {
-  outline: 2px solid #263b50;
-  outline-offset: 1px;
-  border-color: #263b50;
-}
-
-#serial-form button {
-  min-width: 160px;
-  padding: 12px 24px;
-  border: none;
-  background: #263b50;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-#serial-form button:hover {
-  background: #354e67;
-}
-
-#serial-message {
-  font-size: 13px;
+  footer {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
