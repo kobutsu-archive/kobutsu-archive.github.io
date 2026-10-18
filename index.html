@@ -85,12 +85,16 @@
 
   // 下線と太字を切り替える
   function highlightLink(index) {
-    nav.style.setProperty("--active-index", index);
+  nav.style.setProperty("--active-index", index);
 
-    links.forEach((link, i) => {
-      link.classList.toggle("highlight", i === index);
-    });
-  }
+  links.forEach((link, i) => {
+    link.classList.toggle("highlight", i === index);
+    link.classList.toggle(
+      "active",
+      i === currentIndex && i === index
+    );
+  });
+}
 
   // 初期状態は現在のページ
   function resetHighlight() {

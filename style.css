@@ -74,9 +74,22 @@ nav a.active {
   font-weight: 700;
 }
 
+/* ハイライト中 */
 nav a.highlight {
   color: #263b50;
   font-weight: 700;
+}
+
+/* ハイライト中は現ページの太字を解除 */
+nav a.active.highlight:not(:hover) {
+  font-weight: 400;
+}
+
+/* 太字の切り替えを少し遅らせる */
+nav a {
+  transition:
+    color 0.25s ease,
+    font-weight 0s 0.12s;
 }
 
 /* スライドする下線 */
