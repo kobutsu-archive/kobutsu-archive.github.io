@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -26,66 +25,65 @@
 
   <!-- メインコンテンツ -->
   <main>
-<div class="page-heading">
-  <p>ITEM INFORMATION SYSTEM</p>
-  <h2>物品照会</h2>
-</div>
+    <div class="page-heading">
+      <p>ITEM INFORMATION SYSTEM</p>
+      <h2>物品照会</h2>
+    </div>
 
-<h3>シリアルコード入力</h3>
+    <!-- シリアルコード入力 -->
+    <h3>シリアルコード入力</h3>
+    <p>物品に付属するシリアルコードを入力してください。</p>
 
-<p>物品に付属するシリアルコードを入力してください。</p>
+    <form id="serial-form">
+      <div class="serial-inputs">
+        <input
+          type="text"
+          class="serial-part"
+          maxlength="3"
+          placeholder="ARC"
+          aria-label="分類記号3文字"
+          autocomplete="off"
+          autocapitalize="characters"
+          required
+        >
 
-<form id="serial-form">
-  <div class="serial-inputs">
-    <input
-      type="text"
-      class="serial-part"
-      maxlength="3"
-      placeholder="ARC"
-      aria-label="分類記号3文字"
-      autocomplete="off"
-      autocapitalize="characters"
-      required
-    >
+        <input
+          type="text"
+          class="serial-part"
+          maxlength="4"
+          inputmode="numeric"
+          placeholder="0000"
+          aria-label="個別番号1"
+          autocomplete="off"
+          required
+        >
 
-    <input
-      type="text"
-      class="serial-part"
-      maxlength="4"
-      inputmode="numeric"
-      placeholder="0000"
-      aria-label="個別番号1"
-      autocomplete="off"
-      required
-    >
+        <input
+          type="text"
+          class="serial-part"
+          maxlength="4"
+          inputmode="numeric"
+          placeholder="0000"
+          aria-label="個別番号2"
+          autocomplete="off"
+          required
+        >
 
-    <input
-      type="text"
-      class="serial-part"
-      maxlength="4"
-      inputmode="numeric"
-      placeholder="0000"
-      aria-label="個別番号2"
-      autocomplete="off"
-      required
-    >
+        <input
+          type="text"
+          class="serial-part"
+          maxlength="4"
+          inputmode="numeric"
+          placeholder="0000"
+          aria-label="個別番号3"
+          autocomplete="off"
+          required
+        >
+      </div>
 
-    <input
-      type="text"
-      class="serial-part"
-      maxlength="4"
-      inputmode="numeric"
-      placeholder="0000"
-      aria-label="個別番号3"
-      autocomplete="off"
-      required
-    >
-  </div>
-
-  <button type="submit">照会する</button>
-  <p id="serial-message" aria-live="polite"></p>
-</form>
-    </section>
+      <button type="submit">照会する</button>
+      <p id="serial-message" aria-live="polite"></p>
+    </form>
   </main>
 
   <!-- フッター -->
@@ -94,19 +92,21 @@
     <div class="fiction-note">This is a fictional project.</div>
   </footer>
 
-  <!-- ナビゲーション・シリアルコード制御 -->
   <script>
-    // 現在のページをナビゲーションに反映
+    // ナビゲーション制御
     const nav = document.querySelector("nav");
     const links = [...nav.querySelectorAll("a")];
 
     const currentPage =
       window.location.pathname.split("/").pop() || "index.html";
 
-    const currentIndex = links.findIndex(
+    const foundIndex = links.findIndex(
       link => link.getAttribute("href") === currentPage
     );
 
+    const currentIndex = foundIndex >= 0 ? foundIndex : 0;
+
+    // 現在のページを設定
     links.forEach((link, index) => {
       const isCurrentPage = index === currentIndex;
 
@@ -119,10 +119,38 @@
       }
     });
 
-    nav.style.setProperty(
-      "--active-index",
-      Math.max(0, currentIndex)
-    );
+    // 下線の位置を変更
+    function highlightLink(index) {
+      nav.style.setProperty("--active-index", index);
+      nav.classList.add("is-highlighting");
+    }
+
+    // 現在のページの位置に戻す
+    function resetHighlight() {
+      nav.style.setProperty("--active-index", currentIndex);
+      nav.classList.remove("is-highlighting");
+    }
+
+    resetHighlight();
+
+    // マウス・キーボード操作
+    links.forEach((link, index) => {
+      link.addEventListener("mouseenter", () => {
+        highlightLink(index);
+      });
+
+      link.addEventListener("focus", () => {
+        highlightLink(index);
+      });
+    });
+
+    nav.addEventListener("mouseleave", resetHighlight);
+
+    nav.addEventListener("focusout", event => {
+      if (!nav.contains(event.relatedTarget)) {
+        resetHighlight();
+      }
+    });
 
     // シリアルコード入力制御
     const form = document.getElementById("serial-form");
@@ -139,6 +167,7 @@
           input.value = input.value.replace(/\D/g, "");
         }
 
+        // 入力が完了したら次の欄へ
         if (
           input.value.length === input.maxLength &&
           index < parts.length - 1
@@ -149,6 +178,7 @@
         message.textContent = "";
       });
 
+      // 空欄でBackspaceを押すと前の欄へ
       input.addEventListener("keydown", event => {
         if (
           event.key === "Backspace" &&
@@ -160,7 +190,7 @@
       });
     });
 
-    // 現段階では照会処理は未実装
+    // 仮の照会処理
     form.addEventListener("submit", event => {
       event.preventDefault();
 
@@ -171,4 +201,3 @@
   </script>
 </body>
 </html>
-```
