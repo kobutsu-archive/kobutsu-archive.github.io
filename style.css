@@ -1,37 +1,38 @@
-    * {
-      box-sizing: border-box;
-    }
 
-    body {
-      margin: 0;
-      color: #292f36;
-      background: #f5f5f2;
-      font-family: Arial, "Noto Sans JP", sans-serif;
-      line-height: 1.8;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    header {
-      padding: 30px 8%;
-      color: white;
-      background: #263b50;
-    }
+body {
+  margin: 0;
+  color: #292f36;
+  background: #f5f5f2;
+  font-family: Arial, "Noto Sans JP", sans-serif;
+  line-height: 1.8;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 25px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-    }
+/* ヘッダー */
+header {
+  padding: 30px 8%;
+  color: white;
+  background: #263b50;
+}
 
-    header p {
-      margin: 4px 0 0;
-      color: #d4dce4;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-    }
+header h1 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
 
-  
+header p {
+  margin: 4px 0 0;
+  color: #d4dce4;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
 
+/* ナビゲーション */
 nav {
   --active-index: 0;
 
@@ -58,17 +59,22 @@ nav a {
   letter-spacing: 0.04em;
   text-align: center;
   white-space: nowrap;
-  border: none;
   outline-offset: -3px;
   transition: color 0.25s ease;
 }
 
-/* 選択中のページではなく、マウスが乗った項目を拡大 */
+/* マウスを乗せたとき */
 nav a:hover {
   color: #263b50;
 }
 
-/* 下線は1本だけ */
+/* 現在のページ */
+nav a.active {
+  color: #263b50;
+  font-weight: 700;
+}
+
+/* スライドする下線 */
 nav::after {
   content: "";
   position: absolute;
@@ -82,95 +88,82 @@ nav::after {
   pointer-events: none;
 }
 
+/* キーボード操作時のフォーカス */
 nav a:focus-visible {
   outline: 2px solid #d1a85c;
 }
 
-    main {
-      max-width: 900px;
-      margin: 38px auto;
-      padding: 0 20px;
-    }
-
-    .page-heading {
-      margin-bottom: 28px;
-    }
-
-    .page-heading p {
-      margin: 0;
-      color: #737b82;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-    }
-
-    .page-heading h2 {
-      margin: 3px 0 0;
-      font-size: 23px;
-      font-weight: 500;
-    }
-
-    section {
-      margin-bottom: 24px;
-      padding: 24px;
-      background: white;
-      border: 1px solid #deded9;
-    }
-
-    section h3 {
-      margin-top: 0;
-      font-size: 17px;
-      font-weight: 500;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
-    }
-
-    a {
-      color: #345a7b;
-    }
-
-    .notice-date {
-      color: #777;
-      font-size: 12px;
-    }
-
-    footer {
-      margin-top: 60px;
-      padding: 24px;
-      text-align: center;
-      color: #686868;
-      font-size: 12px;
-      border-top: 1px solid #ddd;
-    }
-
-    
-.fiction-note {
-  margin-top: 2px;
-  font-size: 10px;
-  color: #888888;
+/* メインコンテンツ */
+main {
+  max-width: 900px;
+  margin: 38px auto;
+  padding: 0 20px;
 }
 
-nav a.active {
-  color: #263b50;
-  font-size: 16px;
-  font-weight: 700;
+.page-heading {
+  margin-bottom: 28px;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #737b82;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+
+.page-heading h2 {
+  margin: 3px 0 0;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+/* セクション */
+section {
+  margin-bottom: 24px;
+  padding: 24px;
+  background: white;
+  border: 1px solid #deded9;
+}
+
+section h3 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+a {
+  color: #345a7b;
+}
+
+.notice-date {
+  color: #777;
+  font-size: 12px;
+}
+
+/* フッター */
+footer {
+  margin-top: 60px;
+  padding: 24px;
+  border-top: 1px solid #ddd;
+  color: #686868;
+  font-size: 12px;
+  text-align: center;
+}
+
+.fiction-note {
+  margin-top: 2px;
+  color: #888;
+  font-size: 10px;
 }
 
 /* スマートフォン用 */
 @media (max-width: 520px) {
-  nav {
-    gap: 0;
-  }
-
   nav a {
+    height: 46px;
     font-size: 12px;
-    padding: 14px 0;
   }
-
-  nav a {
-  height: 46px;
-  font-size: 12px;
-  padding: 0;
-}
 
   main {
     margin-top: 28px;
