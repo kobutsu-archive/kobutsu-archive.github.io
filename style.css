@@ -74,6 +74,11 @@ nav a.active {
   font-weight: 700;
 }
 
+nav a.highlight {
+  color: #263b50;
+  font-weight: 700;
+}
+
 /* スライドする下線 */
 nav::after {
   content: "";

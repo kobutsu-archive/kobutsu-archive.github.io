@@ -57,62 +57,72 @@
   </footer>
 
   <!-- ナビゲーション制御 -->
-  <script>
-    const nav = document.querySelector("nav");
-    const links = [...nav.querySelectorAll("a")];
 
-    const currentPage =
-      window.location.pathname.split("/").pop() || "index.html";
+<script>
+  const nav = document.querySelector("nav");
+  const links = [...nav.querySelectorAll("a")];
 
-    const currentIndex = Math.max(
-      0,
-      links.findIndex(link => link.getAttribute("href") === currentPage)
-    );
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
 
-    // 現在のページを設定
-    links.forEach((link, index) => {
-      const isCurrentPage = index === currentIndex;
+  const currentIndex = Math.max(
+    0,
+    links.findIndex(link => link.getAttribute("href") === currentPage)
+  );
 
-      link.classList.toggle("active", isCurrentPage);
+  // 現在のページを設定
+  links.forEach((link, index) => {
+    const isCurrentPage = index === currentIndex;
 
-      if (isCurrentPage) {
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
+    link.classList.toggle("active", isCurrentPage);
 
-    // 下線を指定した項目へ移動
-    function moveUnderline(index) {
-      nav.style.setProperty("--active-index", index);
+    if (isCurrentPage) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
     }
+  });
 
-    // 初期位置は現在のページ
-    moveUnderline(currentIndex);
+  // 下線と太字を切り替える
+  function highlightLink(index) {
+    nav.style.setProperty("--active-index", index);
 
-    // マウス・キーボード操作
-    links.forEach((link, index) => {
-      link.addEventListener("mouseenter", () => {
-        moveUnderline(index);
-      });
+    links.forEach((link, i) => {
+      link.classList.toggle("highlight", i === index);
+    });
+  }
 
-      link.addEventListener("focus", () => {
-        moveUnderline(index);
-      });
+  // 初期状態は現在のページ
+  function resetHighlight() {
+    nav.style.setProperty("--active-index", currentIndex);
+
+    links.forEach(link => {
+      link.classList.remove("highlight");
+    });
+  }
+
+  resetHighlight();
+
+  // マウス・キーボード操作
+  links.forEach((link, index) => {
+    link.addEventListener("mouseenter", () => {
+      highlightLink(index);
     });
 
-    // ナビゲーションを離れたら元の位置へ戻す
-    function resetUnderline() {
-      moveUnderline(currentIndex);
+    link.addEventListener("focus", () => {
+      highlightLink(index);
+    });
+  });
+
+  // ナビゲーションから離れたら現在のページに戻す
+  nav.addEventListener("mouseleave", resetHighlight);
+
+  nav.addEventListener("focusout", event => {
+    if (!nav.contains(event.relatedTarget)) {
+      resetHighlight();
     }
+  });
+</script>
 
-    nav.addEventListener("mouseleave", resetUnderline);
-
-    nav.addEventListener("focusout", event => {
-      if (!nav.contains(event.relatedTarget)) {
-        resetUnderline();
-      }
-    });
-  </script>
 </body>
 </html>
