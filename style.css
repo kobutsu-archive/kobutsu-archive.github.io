@@ -10,6 +10,7 @@ body {
   line-height: 1.8;
 }
 
+/* ヘッダー */
 header {
   padding: 28px 6% 24px;
   background: #263b50;
@@ -125,6 +126,29 @@ section p {
   font-size: 14px;
 }
 
+/* HOME：物品情報ボックス */
+.item-info {
+  margin: 20px 0;
+  padding: 20px 24px;
+  background: #fff;
+  border: 1px solid #d5d9dc;
+  border-left: 3px solid #263b50;
+  border-radius: 2px;
+  color: #333b42;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* HOME：リンク */
+main a {
+  color: #263b50;
+  text-underline-offset: 3px;
+}
+
+main a:hover {
+  color: #526d87;
+}
+
 /* フッター */
 footer {
   display: flex;
@@ -180,6 +204,7 @@ footer {
   font-size: 14px;
 }
 
+/* シリアルコード入力フォーム */
 .serial-form {
   padding: 24px;
   background: #fff;
@@ -235,6 +260,7 @@ footer {
   font-size: 11px;
 }
 
+/* 照会ボタン */
 #serial-form button {
   width: 100%;
   min-height: 48px;
@@ -262,6 +288,7 @@ footer {
   font-size: 13px;
 }
 
+/* 照会に関する案内 */
 .archive-notice {
   margin-top: 22px;
   padding: 14px 16px;
@@ -282,7 +309,7 @@ footer {
   line-height: 1.7;
 }
 
-/* スマートフォン */
+/* スマートフォン対応 */
 @media (max-width: 600px) {
   header {
     padding: 22px 5%;
@@ -316,6 +343,12 @@ footer {
     font-size: 23px;
   }
 
+  /* HOME */
+  .item-info {
+    padding: 16px;
+  }
+
+  /* ARCHIVE */
   .archive-title {
     align-items: start;
     flex-direction: column;
@@ -335,54 +368,9 @@ footer {
     font-size: 16px;
   }
 
+  /* フッター */
   footer {
     flex-direction: column;
     gap: 4px;
   }
-
-/* HOME：テキストボックス */
-.home-box {
-  margin: 24px 0;
-  padding: 24px;
-  background: #fff;
-  border: 1px solid #d5d9dc;
-  border-left: 3px solid #263b50;
-  border-radius: 2px;
-}
-
-.home-box h3 {
-  margin-top: 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e0e3e5;
-}
-
-.home-box p {
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 1.9;
-}
-
-.home-box a {
-  color: #263b50;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.home-box a:hover {
-  color: #526d87;
-}
-
-/* HOMEのボックス内のリスト */
-.home-box ul {
-  padding-left: 20px;
-  font-size: 14px;
-  line-height: 2;
-}
-
-/* スマートフォン */
-@media (max-width: 600px) {
-  .home-box {
-    padding: 18px;
-  }
-}
 }
