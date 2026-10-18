@@ -69,11 +69,8 @@ nav a {
 }
 
 /* 選択中のページではなく、マウスが乗った項目を拡大 */
-nav a:hover,
-nav a:focus-visible {
+nav a:hover {
   color: #263b50;
-  font-size: 18px;
-  font-weight: 600;
 }
 
 /* 下線は1本だけ */
@@ -93,7 +90,6 @@ nav::after {
 nav a:focus-visible {
   outline: 2px solid #d1a85c;
 }
-
 
     main {
       max-width: 900px;
@@ -151,15 +147,22 @@ nav a:focus-visible {
       border-top: 1px solid #ddd;
     }
 
-    .fiction-note {
+    
+.fiction-note {
   margin-top: 2px;
   font-size: 10px;
   color: #888888;
 }
- @media (max-width: 520px) {
-      nav {
-        gap: 20px;
-      }@media (max-width: 520px) {
+
+/* 現在のページだけ文字を大きくする */
+nav a.active {
+  color: #263b50;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* スマートフォン用 */
+@media (max-width: 520px) {
   nav {
     gap: 0;
   }
@@ -169,7 +172,6 @@ nav a:focus-visible {
     padding: 14px 0;
   }
 
-  nav a:hover,
   nav a.active {
     font-size: 13px;
   }
