@@ -7,20 +7,24 @@
   <title>古物流通公社</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <!-- ヘッダー -->
   <header>
     <p>物品管理・流通情報</p>
     <h1>古物流通公社</h1>
   </header>
 
-  <nav>
-    <a href="index.html" class="active">HOME</a>
+  <!-- ナビゲーション -->
+  <nav aria-label="メインナビゲーション">
+    <a href="index.html">HOME</a>
     <a href="about.html">ABOUT</a>
     <a href="archive.html">ARCHIVE</a>
     <a href="shop.html">SHOP</a>
     <a href="contact.html">CONTACT</a>
   </nav>
 
+  <!-- メインコンテンツ -->
   <main>
     <div class="page-heading">
       <p>PUBLIC INFORMATION</p>
@@ -46,54 +50,69 @@
     </section>
   </main>
 
+  <!-- フッター -->
   <footer>
     <div>Created by ogu²</div>
     <div class="fiction-note">This is a fictional project.</div>
   </footer>
 
+  <!-- ナビゲーション制御 -->
+  <script>
+    const nav = document.querySelector("nav");
+    const links = [...nav.querySelectorAll("a")];
 
-<script>
-  const nav = document.querySelector("nav");
-  const links = [...nav.querySelectorAll("a")];
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
 
-  const currentPage =
-    window.location.pathname.split("/").pop() || "index.html";
+    const currentIndex = Math.max(
+      0,
+      links.findIndex(link => link.getAttribute("href") === currentPage)
+    );
 
-  const currentIndex = Math.max(
-    0,
-    links.findIndex(link =>
-      link.getAttribute("href") === currentPage
-    )
-  );
+    // 現在のページを設定
+    links.forEach((link, index) => {
+      const isCurrentPage = index === currentIndex;
 
-  // 現在のページの位置を基準にする
-  function returnToCurrentPage() {
-    nav.style.setProperty("--active-index", currentIndex);
-  }
+      link.classList.toggle("active", isCurrentPage);
 
-  // 初期表示
-  returnToCurrentPage();
-
-  // マウスを乗せた項目へ下線を移動
-  links.forEach((link, index) => {
-    link.addEventListener("mouseenter", () => {
-      nav.style.setProperty("--active-index", index);
+      if (isCurrentPage) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
 
-    link.addEventListener("focus", () => {
+    // 下線を指定した項目へ移動
+    function moveUnderline(index) {
       nav.style.setProperty("--active-index", index);
-    });
-  });
-
-  // メニューから離れたら現在のページへ戻す
-  nav.addEventListener("mouseleave", returnToCurrentPage);
-
-  nav.addEventListener("focusout", event => {
-    if (!nav.contains(event.relatedTarget)) {
-      returnToCurrentPage();
     }
-  });
-</script>
 
+    // 初期位置は現在のページ
+    moveUnderline(currentIndex);
+
+    // マウス・キーボード操作
+    links.forEach((link, index) => {
+      link.addEventListener("mouseenter", () => {
+        moveUnderline(index);
+      });
+
+      link.addEventListener("focus", () => {
+        moveUnderline(index);
+      });
+    });
+
+    // ナビゲーションを離れたら元の位置へ戻す
+    function resetUnderline() {
+      moveUnderline(currentIndex);
+    }
+
+    nav.addEventListener("mouseleave", resetUnderline);
+
+    nav.addEventListener("focusout", event => {
+      if (!nav.contains(event.relatedTarget)) {
+        resetUnderline();
+      }
+    });
+  </script>
 </body>
 </html>
