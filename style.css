@@ -51,12 +51,29 @@ nav a {
   white-space: nowrap;
   border-bottom: 3px solid transparent;
 }
+　
+/* メニューの文字サイズ変化 */
+nav a {
+  position: relative;
+  border-bottom: 3px solid transparent;
+  transition:
+    color 0.25s ease,
+    font-size 0.25s ease,
+    font-weight 0.25s ease;
+}
 
-    nav a:hover,
-    nav a.active {
-      color: #263b50;
-      border-bottom-color: #263b50;
-    }
+nav a:hover,
+nav a.active {
+  color: #263b50;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* キーボード操作時にも分かりやすくする */
+nav a:focus-visible {
+  outline: 2px solid #d1a85c;
+  outline-offset: -3px;
+}
 
     main {
       max-width: 900px;
