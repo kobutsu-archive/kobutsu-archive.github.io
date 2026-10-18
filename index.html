@@ -51,41 +51,49 @@
     <div class="fiction-note">This is a fictional project.</div>
   </footer>
 
-  <script>
-    const nav = document.querySelector("nav");
-    const links = [...nav.querySelectorAll("a")];
 
-    const currentPage =
-      window.location.pathname.split("/").pop() || "index.html";
+<script>
+  const nav = document.querySelector("nav");
+  const links = [...nav.querySelectorAll("a")];
 
-    let activeIndex = links.findIndex(link =>
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
+
+  const currentIndex = Math.max(
+    0,
+    links.findIndex(link =>
       link.getAttribute("href") === currentPage
-    );
+    )
+  );
 
-    if (activeIndex < 0) activeIndex = 0;
+  // 現在のページの位置を基準にする
+  function returnToCurrentPage() {
+    nav.style.setProperty("--active-index", currentIndex);
+  }
 
-    function setActive(index) {
+  // 初期表示
+  returnToCurrentPage();
+
+  // マウスを乗せた項目へ下線を移動
+  links.forEach((link, index) => {
+    link.addEventListener("mouseenter", () => {
       nav.style.setProperty("--active-index", index);
+    });
 
-      links.forEach((link, i) => {
-        link.classList.toggle("active", i === index);
-      });
+    link.addEventListener("focus", () => {
+      nav.style.setProperty("--active-index", index);
+    });
+  });
+
+  // メニューから離れたら現在のページへ戻す
+  nav.addEventListener("mouseleave", returnToCurrentPage);
+
+  nav.addEventListener("focusout", event => {
+    if (!nav.contains(event.relatedTarget)) {
+      returnToCurrentPage();
     }
+  });
+</script>
 
-    setActive(activeIndex);
-
-    links.forEach((link, index) => {
-      link.addEventListener("mouseenter", () => setActive(index));
-      link.addEventListener("focus", () => setActive(index));
-    });
-
-    nav.addEventListener("mouseleave", () => setActive(activeIndex));
-
-    nav.addEventListener("focusout", event => {
-      if (!nav.contains(event.relatedTarget)) {
-        setActive(activeIndex);
-      }
-    });
-  </script>
 </body>
 </html>
