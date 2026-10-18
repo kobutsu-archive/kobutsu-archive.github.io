@@ -49,7 +49,8 @@ nav a {
   align-items: center;
   justify-content: center;
   min-width: 0;
-  padding: 16px 0;
+  height: 54px;
+  padding: 0;
   color: #414b55;
   text-decoration: none;
   font-size: 16px;
@@ -57,15 +58,9 @@ nav a {
   letter-spacing: 0.04em;
   text-align: center;
   white-space: nowrap;
-
-  /* 個別の下線は表示しない */
   border: none;
   outline-offset: -3px;
-
-  transition:
-    color 0.25s ease,
-    font-size 0.25s ease,
-    font-weight 0.25s ease;
+  transition: color 0.25s ease;
 }
 
 /* 選択中のページではなく、マウスが乗った項目を拡大 */
@@ -154,11 +149,11 @@ nav a:focus-visible {
   color: #888888;
 }
 
-/* 現在のページだけ文字を大きくする */
 nav a.active {
   color: #263b50;
   font-size: 18px;
   font-weight: 600;
+  transform: scale(1);
 }
 
 /* スマートフォン用 */
