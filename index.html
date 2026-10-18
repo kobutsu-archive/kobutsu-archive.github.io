@@ -7,45 +7,6 @@
   <title>古物流通公社</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
-<script>
-  const nav = document.querySelector("nav");
-  const links = [...nav.querySelectorAll("a")];
-
-  const currentPage =
-    window.location.pathname.split("/").pop() || "index.html";
-
-  let activeIndex = links.findIndex(link =>
-    link.getAttribute("href") === currentPage
-  );
-
-  if (activeIndex < 0) activeIndex = 0;
-
-  function setActive(index) {
-    nav.style.setProperty("--active-index", index);
-
-    links.forEach((link, i) => {
-      link.classList.toggle("active", i === index);
-    });
-  }
-
-  setActive(activeIndex);
-
-  links.forEach((link, index) => {
-    link.addEventListener("mouseenter", () => setActive(index));
-    link.addEventListener("focus", () => setActive(index));
-  });
-
-  nav.addEventListener("mouseleave", () => setActive(activeIndex));
-
-  nav.addEventListener("focusout", event => {
-    if (!nav.contains(event.relatedTarget)) {
-      setActive(activeIndex);
-    }
-  });
-</script>
-</body>
-
 <body>
   <header>
     <p>物品管理・流通情報</p>
@@ -90,5 +51,41 @@
     <div class="fiction-note">This is a fictional project.</div>
   </footer>
 
+  <script>
+    const nav = document.querySelector("nav");
+    const links = [...nav.querySelectorAll("a")];
+
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
+
+    let activeIndex = links.findIndex(link =>
+      link.getAttribute("href") === currentPage
+    );
+
+    if (activeIndex < 0) activeIndex = 0;
+
+    function setActive(index) {
+      nav.style.setProperty("--active-index", index);
+
+      links.forEach((link, i) => {
+        link.classList.toggle("active", i === index);
+      });
+    }
+
+    setActive(activeIndex);
+
+    links.forEach((link, index) => {
+      link.addEventListener("mouseenter", () => setActive(index));
+      link.addEventListener("focus", () => setActive(index));
+    });
+
+    nav.addEventListener("mouseleave", () => setActive(activeIndex));
+
+    nav.addEventListener("focusout", event => {
+      if (!nav.contains(event.relatedTarget)) {
+        setActive(activeIndex);
+      }
+    });
+  </script>
 </body>
 </html>
