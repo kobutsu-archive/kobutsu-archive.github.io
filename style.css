@@ -151,9 +151,8 @@ nav a:focus-visible {
 
 nav a.active {
   color: #263b50;
-  font-size: 18px;
-  font-weight: 600;
-  transform: scale(1);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* スマートフォン用 */
@@ -168,8 +167,9 @@ nav a.active {
   }
 
   nav a.active {
-    font-size: 13px;
-  }
+  font-size: 12px;
+  font-weight: 700;
+}
 
   main {
     margin-top: 28px;
