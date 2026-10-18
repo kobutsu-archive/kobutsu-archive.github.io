@@ -96,14 +96,14 @@
   });
 }
 
-  // 初期状態は現在のページ
   function resetHighlight() {
-    nav.style.setProperty("--active-index", currentIndex);
+  nav.style.setProperty("--active-index", currentIndex);
 
-    links.forEach(link => {
-      link.classList.remove("highlight");
-    });
-  }
+  links.forEach((link, i) => {
+    link.classList.remove("highlight");
+    link.classList.toggle("active", i === currentIndex);
+  });
+}
 
   resetHighlight();
 
