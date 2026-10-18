@@ -114,16 +114,20 @@ h3 {
   font-weight: 500;
 }
 
+/* セクション */
 section {
-  margin: 32px 0;
+  margin-bottom: 24px;
   padding: 24px;
-  background: #fff;
-  border: 1px solid #d5d9dc;
-  border-radius: 2px;
+  background: white;
+  border: 1px solid #deded9;
 }
 
 section h3 {
-  margin-bottom: 12px;
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 section p {
