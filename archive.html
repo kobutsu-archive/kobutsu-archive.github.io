@@ -1,0 +1,65 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>物品照会 | 古物流通公社</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- ヘッダー -->
+  <header>
+    <p>物品管理・流通情報</p>
+    <h1>古物流通公社</h1>
+  </header>
+
+  <!-- ナビゲーション -->
+  <nav aria-label="メインナビゲーション">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="archive.html">ARCHIVE</a>
+    <a href="shop.html">SHOP</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+
+  <!-- メインコンテンツ -->
+  <main>
+    <div class="page-heading">
+      <p>ITEM INFORMATION SYSTEM</p>
+      <h2>物品照会</h2>
+    </div>
+
+    <section>
+      <h3>シリアルコード入力</h3>
+
+      <p>
+        照会対象物品に付属するシリアルコードを入力してください。
+      </p>
+
+      <form>
+        <label for="serial-code">シリアルコード</label>
+
+        <input
+          type="text"
+          id="serial-code"
+          name="serial-code"
+          placeholder="例：KBR-000001"
+          autocomplete="off"
+          required
+        >
+
+        <button type="submit">照会する</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <div>Created by ogu²</div>
+    <div class="fiction-note">This is a fictional project.</div>
+  </footer>
+</body>
+</html>
+```
