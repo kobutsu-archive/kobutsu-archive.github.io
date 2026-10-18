@@ -176,6 +176,11 @@ footer {
   font-size: 10px;
 }
 
+.item-info {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 /* スマートフォン用 */
 @media (max-width: 520px) {
   nav a {
