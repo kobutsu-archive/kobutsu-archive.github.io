@@ -166,9 +166,10 @@ nav a.active {
     padding: 14px 0;
   }
 
-  nav a.active {
+  nav a {
+  height: 46px;
   font-size: 12px;
-  font-weight: 700;
+  padding: 0;
 }
 
   main {
