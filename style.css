@@ -153,13 +153,26 @@ nav a:focus-visible {
  @media (max-width: 520px) {
       nav {
         gap: 20px;
-      }
+      }@media (max-width: 520px) {
+  nav {
+    gap: 0;
+  }
 
-      main {
-        margin-top: 28px;
-      }
+  nav a {
+    font-size: 12px;
+    padding: 14px 0;
+  }
 
-      section {
-        padding: 18px;
-      }
-    }
+  nav a:hover,
+  nav a.active {
+    font-size: 13px;
+  }
+
+  main {
+    margin-top: 28px;
+  }
+
+  section {
+    padding: 18px;
+  }
+}
