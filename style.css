@@ -116,3 +116,16 @@
   font-size: 10px;
   color: #888888;
 }
+ @media (max-width: 520px) {
+      nav {
+        gap: 20px;
+      }
+
+      main {
+        margin-top: 28px;
+      }
+
+      section {
+        padding: 18px;
+      }
+    }
