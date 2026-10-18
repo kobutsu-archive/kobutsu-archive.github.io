@@ -26,67 +26,65 @@
 
   <!-- メインコンテンツ -->
   <main>
-    <div class="page-heading">
-      <p>ITEM INFORMATION SYSTEM</p>
-      <h2>物品照会</h2>
-    </div>
+<div class="page-heading">
+  <p>ITEM INFORMATION SYSTEM</p>
+  <h2>物品照会</h2>
+</div>
 
-    <section>
-      <h3>シリアルコード入力</h3>
+<h3>シリアルコード入力</h3>
 
-      <p>物品に付属するシリアルコードを入力してください。</p>
+<p>物品に付属するシリアルコードを入力してください。</p>
 
-      <form id="serial-form">
-        <div class="serial-inputs">
-          <input
-            type="text"
-            class="serial-part"
-            maxlength="3"
-            placeholder="ARC"
-            aria-label="分類記号3文字"
-            autocomplete="off"
-            autocapitalize="characters"
-            required
-          >
+<form id="serial-form">
+  <div class="serial-inputs">
+    <input
+      type="text"
+      class="serial-part"
+      maxlength="3"
+      placeholder="ARC"
+      aria-label="分類記号3文字"
+      autocomplete="off"
+      autocapitalize="characters"
+      required
+    >
 
-          <input
-            type="text"
-            class="serial-part"
-            maxlength="4"
-            inputmode="numeric"
-            placeholder="0000"
-            aria-label="個別番号1"
-            autocomplete="off"
-            required
-          >
+    <input
+      type="text"
+      class="serial-part"
+      maxlength="4"
+      inputmode="numeric"
+      placeholder="0000"
+      aria-label="個別番号1"
+      autocomplete="off"
+      required
+    >
 
-          <input
-            type="text"
-            class="serial-part"
-            maxlength="4"
-            inputmode="numeric"
-            placeholder="0000"
-            aria-label="個別番号2"
-            autocomplete="off"
-            required
-          >
+    <input
+      type="text"
+      class="serial-part"
+      maxlength="4"
+      inputmode="numeric"
+      placeholder="0000"
+      aria-label="個別番号2"
+      autocomplete="off"
+      required
+    >
 
-          <input
-            type="text"
-            class="serial-part"
-            maxlength="4"
-            inputmode="numeric"
-            placeholder="0000"
-            aria-label="個別番号3"
-            autocomplete="off"
-            required
-          >
-        </div>
+    <input
+      type="text"
+      class="serial-part"
+      maxlength="4"
+      inputmode="numeric"
+      placeholder="0000"
+      aria-label="個別番号3"
+      autocomplete="off"
+      required
+    >
+  </div>
 
-        <button type="submit">照会する</button>
-
-        <p id="serial-message" aria-live="polite"></p>
-      </form>
+  <button type="submit">照会する</button>
+  <p id="serial-message" aria-live="polite"></p>
+</form>
     </section>
   </main>
 
