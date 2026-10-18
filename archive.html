@@ -8,6 +8,32 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
+<script>
+  const nav = document.querySelector("nav");
+  const links = [...nav.querySelectorAll("a")];
+
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
+
+  const currentIndex = links.findIndex(
+    link => link.getAttribute("href") === currentPage
+  );
+
+  links.forEach((link, index) => {
+    const isCurrentPage = index === currentIndex;
+
+    link.classList.toggle("active", isCurrentPage);
+
+    if (isCurrentPage) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+
+  nav.style.setProperty("--active-index", Math.max(0, currentIndex));
+</script>
+
 <body>
   <!-- ヘッダー -->
   <header>
