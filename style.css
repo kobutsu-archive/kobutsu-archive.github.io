@@ -89,7 +89,7 @@ nav a.active.highlight:not(:hover) {
 nav a {
   transition:
     color 0.25s ease,
-    font-weight 0s 0.05s;
+    font-weight 0s 0.07s;
 }
 
 /* スライドする下線 */

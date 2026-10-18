@@ -45,7 +45,7 @@
 
     <section>
       <h3>在庫確認</h3>
-      <p><p>現在、購入可能な古物の確認はこちらからご利用いただけます。</p></p>
+      <p>現在、購入可能な古物の確認はこちらからご利用いただけます。</p>
       <p><a href="shop.html">在庫を確認する</a></p>
     </section>
   </main>
@@ -57,76 +57,73 @@
   </footer>
 
   <!-- ナビゲーション制御 -->
+  <script>
+    const nav = document.querySelector("nav");
+    const links = [...nav.querySelectorAll("a")];
 
-<script>
-  const nav = document.querySelector("nav");
-  const links = [...nav.querySelectorAll("a")];
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
 
-  const currentPage =
-    window.location.pathname.split("/").pop() || "index.html";
-
-  const currentIndex = Math.max(
-    0,
-    links.findIndex(link => link.getAttribute("href") === currentPage)
-  );
-
-  // 現在のページを設定
-  links.forEach((link, index) => {
-    const isCurrentPage = index === currentIndex;
-
-    link.classList.toggle("active", isCurrentPage);
-
-    if (isCurrentPage) {
-      link.setAttribute("aria-current", "page");
-    } else {
-      link.removeAttribute("aria-current");
-    }
-  });
-
-  // 下線と太字を切り替える
-  function highlightLink(index) {
-  nav.style.setProperty("--active-index", index);
-
-  links.forEach((link, i) => {
-    link.classList.toggle("highlight", i === index);
-    link.classList.toggle(
-      "active",
-      i === currentIndex && i === index
+    const foundIndex = links.findIndex(
+      link => link.getAttribute("href") === currentPage
     );
-  });
-}
 
-  function resetHighlight() {
-  nav.style.setProperty("--active-index", currentIndex);
+    const currentIndex = foundIndex >= 0 ? foundIndex : 0;
 
-  links.forEach((link, i) => {
-    link.classList.remove("highlight");
-    link.classList.toggle("active", i === currentIndex);
-  });
-}
+    // 現在のページを設定
+    links.forEach((link, index) => {
+      const isCurrentPage = index === currentIndex;
 
-  resetHighlight();
+      link.classList.toggle("active", isCurrentPage);
 
-  // マウス・キーボード操作
-  links.forEach((link, index) => {
-    link.addEventListener("mouseenter", () => {
-      highlightLink(index);
+      if (isCurrentPage) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
 
-    link.addEventListener("focus", () => {
-      highlightLink(index);
-    });
-  });
+    // 下線とハイライトを切り替える
+    function highlightLink(index) {
+      nav.style.setProperty("--active-index", index);
+      nav.classList.add("is-highlighting");
 
-  // ナビゲーションから離れたら現在のページに戻す
-  nav.addEventListener("mouseleave", resetHighlight);
-
-  nav.addEventListener("focusout", event => {
-    if (!nav.contains(event.relatedTarget)) {
-      resetHighlight();
+      links.forEach((link, i) => {
+        link.classList.toggle("highlight", i === index);
+      });
     }
-  });
-</script>
 
+    // 現在のページの表示に戻す
+    function resetHighlight() {
+      nav.style.setProperty("--active-index", currentIndex);
+      nav.classList.remove("is-highlighting");
+
+      links.forEach(link => {
+        link.classList.remove("highlight");
+      });
+    }
+
+    resetHighlight();
+
+    // マウス・キーボード操作
+    links.forEach((link, index) => {
+      link.addEventListener("mouseenter", () => {
+        highlightLink(index);
+      });
+
+      link.addEventListener("focus", () => {
+        highlightLink(index);
+      });
+    });
+
+    // ナビゲーションから離れたら元に戻す
+    nav.addEventListener("mouseleave", resetHighlight);
+
+    nav.addEventListener("focusout", event => {
+      if (!nav.contains(event.relatedTarget)) {
+        resetHighlight();
+      }
+    });
+  </script>
 </body>
 </html>
