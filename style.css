@@ -339,4 +339,50 @@ footer {
     flex-direction: column;
     gap: 4px;
   }
+
+/* HOME：テキストボックス */
+.home-box {
+  margin: 24px 0;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #d5d9dc;
+  border-left: 3px solid #263b50;
+  border-radius: 2px;
+}
+
+.home-box h3 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e3e5;
+}
+
+.home-box p {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.home-box a {
+  color: #263b50;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.home-box a:hover {
+  color: #526d87;
+}
+
+/* HOMEのボックス内のリスト */
+.home-box ul {
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* スマートフォン */
+@media (max-width: 600px) {
+  .home-box {
+    padding: 18px;
+  }
+}
 }
