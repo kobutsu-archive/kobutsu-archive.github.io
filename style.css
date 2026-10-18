@@ -116,6 +116,10 @@ h3 {
 
 section {
   margin: 32px 0;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #d5d9dc;
+  border-radius: 2px;
 }
 
 section h3 {
