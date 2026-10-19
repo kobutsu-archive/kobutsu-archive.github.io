@@ -160,4 +160,4 @@ form.addEventListener("submit", event => {
   resultArea.append(heading, name, category, status, description);
   resultArea.hidden = false;
 });
-
+})();

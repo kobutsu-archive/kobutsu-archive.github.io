@@ -122,6 +122,68 @@
 
   <script src="items.js"></script>
   <script src="search.js"></script>
+
+  <!-- ナビゲーション制御 -->
+  <script>
+    (() => {
+      const nav = document.querySelector("nav");
+      if (!nav) return;
+
+      const links = [...nav.querySelectorAll("a")];
+
+      const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+
+      const foundIndex = links.findIndex(
+        link => link.getAttribute("href") === currentPage
+      );
+
+      const currentIndex = foundIndex >= 0 ? foundIndex : 0;
+
+      // 現在のページを設定
+      links.forEach((link, index) => {
+        const isCurrentPage = index === currentIndex;
+
+        link.classList.toggle("active", isCurrentPage);
+
+        if (isCurrentPage) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      // 下線を移動
+      function highlightLink(index) {
+        nav.style.setProperty("--active-index", index);
+      }
+
+      // 現在のページの位置に戻す
+      function resetHighlight() {
+        nav.style.setProperty("--active-index", currentIndex);
+      }
+
+      resetHighlight();
+
+      links.forEach((link, index) => {
+        link.addEventListener("mouseenter", () => {
+          highlightLink(index);
+        });
+
+        link.addEventListener("focus", () => {
+          highlightLink(index);
+        });
+      });
+
+      nav.addEventListener("mouseleave", resetHighlight);
+
+      nav.addEventListener("focusout", event => {
+        if (!nav.contains(event.relatedTarget)) {
+          resetHighlight();
+        }
+      });
+    })();
+  </script>
   
 </body>
 </html>
