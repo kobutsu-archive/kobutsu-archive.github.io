@@ -392,3 +392,62 @@ footer {
     gap: 4px;
   }
 }
+
+
+/* SHOP：販売部門閉鎖案内 */
+.shop-main {
+  max-width: 760px;
+}
+
+.shop-status {
+  margin-top: 28px;
+  padding: 28px 24px;
+  background: #fff;
+  border: 1px solid #d8dcd9;
+  border-left: 3px solid #263b50;
+  border-radius: 2px;
+}
+
+.shop-status-label {
+  margin: 0 0 8px;
+  color: #737b82;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+
+.shop-status h3 {
+  margin: 0 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d5d9dc;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.shop-status-message {
+  margin: 0;
+  color: #5c646a;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.shop-status-info {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid #e0e2df;
+  color: #737b82;
+  font-size: 12px;
+}
+
+.shop-status-info p {
+  margin: 4px 0;
+}
+
+@media (max-width: 600px) {
+  .shop-status {
+    padding: 22px 16px;
+  }
+
+  .shop-status h3 {
+    font-size: 21px;
+  }
+}
