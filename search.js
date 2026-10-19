@@ -164,7 +164,15 @@ form.addEventListener("submit", event => {
   const notes = document.createElement("p");
   notes.textContent = "備考：" + item.notes;
 
-  resultArea.append(heading, name, category, status, description);
-  resultArea.hidden = false;
-});
+ resultArea.append(
+  heading,
+  name,
+  category,
+  collectionDate,
+  status,
+  condition,
+  notes
+);
+resultArea.hidden = false;
+})();
 })();
