@@ -408,6 +408,20 @@ footer {
   margin: 4px 0;
 }
 
+/* CONTACT：お問い合わせ */
+
+.contact-main {
+  max-width: 760px;
+}
+
+.contact-main section {
+  margin-bottom: 24px;
+}
+
+.contact-main section:last-child {
+  margin-bottom: 0;
+}
+
 /* スマートフォン対応 */
 
 @media (max-width: 600px) {
