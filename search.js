@@ -114,6 +114,7 @@ console.log("search.js 読み込み成功");
 /* 照会処理 */
 form.addEventListener("submit", event => {
   event.preventDefault();
+  console.log("照会処理が実行されました");
 
   const code = parts
     .map(input => input.value.trim().toUpperCase())
