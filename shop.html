@@ -4,47 +4,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="古物流通公社の販売部門に関するお知らせです。">
   <title>SHOP | 古物流通公社</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <!-- ヘッダー -->
   <header>
     <p>物品管理・流通情報</p>
     <h1>古物流通公社</h1>
   </header>
 
+  <!-- ナビゲーション -->
   <nav aria-label="メインナビゲーション">
     <a href="index.html">HOME</a>
     <a href="about.html">ABOUT</a>
     <a href="archive.html">ARCHIVE</a>
-    <a href="shop.html" class="active"
-       aria-current="page">SHOP</a>
+    <a href="shop.html">SHOP</a>
     <a href="contact.html">CONTACT</a>
   </nav>
 
+  <!-- メインコンテンツ -->
   <main class="shop-main">
     <div class="page-heading">
       <p>SHOP INFORMATION</p>
       <h2>販売部門</h2>
     </div>
 
+    <!-- 販売状況 -->
     <section class="shop-status">
-      <p class="shop-status-label">
+      <p class="shop-status-label">SHOP STATUS</p>
+
       <h3>閉鎖中</h3>
 
       <p class="shop-status-message">
         現在、物品の販売を停止しております。<br>
         販売再開まで、今しばらくお待ちください。
       </p>
+
+      <div class="shop-status-info">
+        <p>販売状況：停止中</p>
+        <p>オンライン販売：現在利用できません</p>
+      </div>
     </section>
   </main>
 
+  <!-- フッター -->
   <footer>
     <div>Created by ogu²</div>
-    <div class="fiction-note">
-      This is a fictional project.
-    </div>
+    <div class="fiction-note">This is a fictional project.</div>
   </footer>
+
+  <!-- ナビゲーション制御 -->
+  <script>
+    (() => {
+      const nav = document.querySelector("nav");
+      if (!nav) return;
+
+      const links = [...nav.querySelectorAll("a")];
+
+      const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+
+      const foundIndex = links.findIndex(
+        link => link.getAttribute("href") === currentPage
+      );
+
+      const currentIndex = foundIndex >= 0 ? foundIndex : 0;
+
+      // 現在のページを設定
+      links.forEach((link, index) => {
+        const isCurrentPage = index === currentIndex;
+
+        link.classList.toggle("active", isCurrentPage);
+
+        if (isCurrentPage) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      // 下線を移動
+      function highlightLink(index) {
+        nav.style.setProperty("--active-index", index);
+      }
+
+      // 現在のページの位置に戻す
+      function resetHighlight() {
+        nav.style.setProperty("--active-index", currentIndex);
+      }
+
+      resetHighlight();
+
+      links.forEach((link, index) => {
+        link.addEventListener("mouseenter", () => {
+          highlightLink(index);
+        });
+
+        link.addEventListener("focus", () => {
+          highlightLink(index);
+        });
+      });
+
+      nav.addEventListener("mouseleave", resetHighlight);
+
+      nav.addEventListener("focusout", event => {
+        if (!nav.contains(event.relatedTarget)) {
+          resetHighlight();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

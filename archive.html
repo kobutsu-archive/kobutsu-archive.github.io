@@ -1,18 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="古物流通公社の物品照会システムです。シリアルコードから物品情報を照会できます。">
   <title>物品照会 | 古物流通公社</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <!-- ヘッダー -->
   <header>
     <p>物品管理・流通情報</p>
     <h1>古物流通公社</h1>
   </header>
 
+  <!-- ナビゲーション -->
   <nav aria-label="メインナビゲーション">
     <a href="index.html">HOME</a>
     <a href="about.html">ABOUT</a>
@@ -21,6 +25,7 @@
     <a href="contact.html">CONTACT</a>
   </nav>
 
+  <!-- メインコンテンツ -->
   <main class="archive-main">
     <div class="page-heading">
       <p>ITEM INFORMATION SYSTEM</p>
@@ -31,11 +36,16 @@
       照会対象物品のシリアルコードを入力してください。
     </p>
 
+    <!-- シリアルコード入力フォーム -->
     <form id="serial-form" class="serial-form">
-      <label class="serial-label">SERIAL CODE</label>
+      <label class="serial-label" for="serial-part-1">
+        SERIAL CODE
+      </label>
 
       <div class="serial-inputs">
         <input
+          id="serial-part-1"
+          name="serial-category"
           type="text"
           class="serial-part"
           maxlength="3"
@@ -43,10 +53,13 @@
           aria-label="分類記号3文字"
           autocomplete="off"
           autocapitalize="characters"
+          spellcheck="false"
           required
         >
 
         <input
+          id="serial-part-2"
+          name="serial-number-1"
           type="text"
           class="serial-part"
           maxlength="4"
@@ -58,6 +71,8 @@
         >
 
         <input
+          id="serial-part-3"
+          name="serial-number-2"
           type="text"
           class="serial-part"
           maxlength="4"
@@ -69,6 +84,8 @@
         >
 
         <input
+          id="serial-part-4"
+          name="serial-number-3"
           type="text"
           class="serial-part"
           maxlength="4"
@@ -81,136 +98,150 @@
       </div>
 
       <button type="submit">
-        照会する <span>→</span>
+        照会する <span aria-hidden="true">→</span>
       </button>
 
       <p id="serial-message" aria-live="polite"></p>
     </form>
 
+    <!-- 照会に関する案内 -->
+    <div class="archive-notice">
+      <span>INFORMATION</span>
+      <p>
+        照会システムは現在、試験運用中です。
+        入力されたコードに対応する物品情報の取得機能は、まだ接続されていません。
+      </p>
+    </div>
   </main>
 
+  <!-- フッター -->
   <footer>
     <div>Created by ogu²</div>
     <div class="fiction-note">This is a fictional project.</div>
   </footer>
 
   <script>
-    // ナビゲーション
-    const nav = document.querySelector("nav");
-    const links = [...nav.querySelectorAll("a")];
+    (() => {
+      /* ナビゲーション制御 */
+      const nav = document.querySelector("nav");
+      if (!nav) return;
 
-    const currentPage =
-      window.location.pathname.split("/").pop() || "index.html";
+      const links = [...nav.querySelectorAll("a")];
 
-    const foundIndex = links.findIndex(
-      link => link.getAttribute("href") === currentPage
-    );
+      const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
 
-    const currentIndex = foundIndex >= 0 ? foundIndex : 0;
+      const foundIndex = links.findIndex(
+        link => link.getAttribute("href") === currentPage
+      );
 
-    links.forEach((link, index) => {
-      const isCurrentPage = index === currentIndex;
+      const currentIndex = foundIndex >= 0 ? foundIndex : 0;
 
-      link.classList.toggle("active", isCurrentPage);
+      links.forEach((link, index) => {
+        const isCurrentPage = index === currentIndex;
 
-      if (isCurrentPage) {
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
+        link.classList.toggle("active", isCurrentPage);
 
-    function highlightLink(index) {
-      nav.style.setProperty("--active-index", index);
-    }
-
-    function resetHighlight() {
-      nav.style.setProperty("--active-index", currentIndex);
-    }
-
-    resetHighlight();
-
-    links.forEach((link, index) => {
-      link.addEventListener("mouseenter", () => {
-        highlightLink(index);
-      });
-
-      link.addEventListener("focus", () => {
-        highlightLink(index);
-      });
-    });
-
-    nav.addEventListener("mouseleave", resetHighlight);
-
-    nav.addEventListener("focusout", event => {
-      if (!nav.contains(event.relatedTarget)) {
-        resetHighlight();
-      }
-    });
-
-    // シリアルコード入力
-    const form = document.getElementById("serial-form");
-    const parts = [...document.querySelectorAll(".serial-part")];
-    const message = document.getElementById("serial-message");
-
-    parts.forEach((input, index) => {
-      input.addEventListener("input", () => {
-        if (index === 0) {
-          input.value = input.value
-            .replace(/[^a-zA-Z]/g, "")
-            .toUpperCase()
-            .slice(0, 3);
+        if (isCurrentPage) {
+          link.setAttribute("aria-current", "page");
         } else {
-          input.value = input.value
-            .replace(/\D/g, "")
-            .slice(0, 4);
-        }
-
-        message.textContent = "";
-
-        // 入力欄が埋まったら次へ移動
-        if (
-          input.value.length === input.maxLength &&
-          index < parts.length - 1
-        ) {
-          parts[index + 1].focus();
+          link.removeAttribute("aria-current");
         }
       });
 
-      input.addEventListener("keydown", event => {
-        // 空欄でBackspaceを押すと前へ移動
-        if (
-          event.key === "Backspace" &&
-          input.value === "" &&
-          index > 0
-        ) {
-          parts[index - 1].focus();
-        }
+      function highlightLink(index) {
+        nav.style.setProperty("--active-index", index);
+      }
 
-        // 左右キーで入力欄を切り替え
-        if (event.key === "ArrowLeft" && index > 0) {
-          parts[index - 1].focus();
-        }
+      function resetHighlight() {
+        nav.style.setProperty("--active-index", currentIndex);
+      }
 
-        if (
-          event.key === "ArrowRight" &&
-          index < parts.length - 1
-        ) {
-          parts[index + 1].focus();
+      resetHighlight();
+
+      links.forEach((link, index) => {
+        link.addEventListener("mouseenter", () => {
+          highlightLink(index);
+        });
+
+        link.addEventListener("focus", () => {
+          highlightLink(index);
+        });
+      });
+
+      nav.addEventListener("mouseleave", resetHighlight);
+
+      nav.addEventListener("focusout", event => {
+        if (!nav.contains(event.relatedTarget)) {
+          resetHighlight();
         }
       });
-    });
 
-    // 照会処理（現在は仮動作）
-    form.addEventListener("submit", event => {
-      event.preventDefault();
+      /* シリアルコード入力制御 */
+      const form = document.getElementById("serial-form");
+      const parts = [...document.querySelectorAll(".serial-part")];
+      const message = document.getElementById("serial-message");
 
-      const code = parts
-        .map(input => input.value)
-        .join("-");
+      if (!form || parts.length !== 4 || !message) return;
 
-      message.textContent = "照会システム未接続：" + code;
-    });
+      parts.forEach((input, index) => {
+        input.addEventListener("input", () => {
+          const previousValue = input.value;
+
+          if (index === 0) {
+            input.value = previousValue
+              .replace(/[^a-zA-Z]/g, "")
+              .toUpperCase()
+              .slice(0, 3);
+          } else {
+            input.value = previousValue
+              .replace(/\D/g, "")
+              .slice(0, 4);
+          }
+
+          message.textContent = "";
+
+          if (
+            input.value.length === input.maxLength &&
+            index < parts.length - 1
+          ) {
+            parts[index + 1].focus();
+          }
+        });
+
+        input.addEventListener("keydown", event => {
+          if (
+            event.key === "Backspace" &&
+            input.value === "" &&
+            index > 0
+          ) {
+            parts[index - 1].focus();
+          }
+
+          if (event.key === "ArrowLeft" && index > 0) {
+            parts[index - 1].focus();
+          }
+
+          if (
+            event.key === "ArrowRight" &&
+            index < parts.length - 1
+          ) {
+            parts[index + 1].focus();
+          }
+        });
+      });
+
+      /* 照会処理：現在は仮動作 */
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const code = parts
+          .map(input => input.value)
+          .join("-");
+
+        message.textContent = "照会システム未接続：" + code;
+      });
+    })();
   </script>
 </body>
 </html>

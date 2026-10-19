@@ -1,20 +1,36 @@
+
+/* ==============================
+   古物流通公社：共通デザイン
+   ============================== */
+
 * {
   box-sizing: border-box;
 }
 
+:root {
+  --color-navy: #263b50;
+  --color-navy-hover: #354e67;
+  --color-text: #333b42;
+  --color-muted: #737b82;
+  --color-border: #d5d9dc;
+  --color-background: #f5f5f2;
+  --color-white: #ffffff;
+}
+
 body {
   margin: 0;
-  background: #f5f5f2;
-  color: #333b42;
+  background: var(--color-background);
+  color: var(--color-text);
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
   line-height: 1.8;
 }
 
 /* ヘッダー */
+
 header {
   padding: 28px 6% 24px;
-  background: #263b50;
-  color: #fff;
+  background: var(--color-navy);
+  color: var(--color-white);
 }
 
 header p {
@@ -32,14 +48,16 @@ header h1 {
 }
 
 /* ナビゲーション */
+
 nav {
   --active-index: 0;
+
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   width: 100%;
-  padding: 0 2%;
-  background: #fff;
+  padding: 0;
+  background: var(--color-white);
   border-bottom: 1px solid #ddd;
 }
 
@@ -47,8 +65,9 @@ nav a {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
   min-height: 54px;
-  color: #737b82;
+  color: var(--color-muted);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-decoration: none;
@@ -57,28 +76,29 @@ nav a {
 
 nav a:hover,
 nav a:focus-visible {
-  color: #263b50;
+  color: var(--color-navy);
 }
 
 nav a.active {
-  color: #263b50;
+  color: var(--color-navy);
   font-weight: 700;
 }
 
 nav::after {
   content: "";
   position: absolute;
-  left: 2%;
+  left: 0;
   bottom: 0;
-  width: 19.2%;
+  width: 20%;
   height: 3px;
-  background: #263b50;
+  background: var(--color-navy);
   transform: translateX(calc(var(--active-index) * 100%));
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
 /* メインコンテンツ */
+
 main {
   width: 88%;
   max-width: 1100px;
@@ -90,35 +110,36 @@ main {
 .page-heading {
   margin-bottom: 36px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #d5d9dc;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .page-heading p {
   margin: 0 0 6px;
-  color: #737b82;
+  color: var(--color-muted);
   font-size: 11px;
   letter-spacing: 0.16em;
 }
 
 .page-heading h2 {
   margin: 0;
-  color: #263b50;
+  color: var(--color-navy);
   font-size: 27px;
   font-weight: 500;
   letter-spacing: 0.05em;
 }
 
 h3 {
-  color: #263b50;
+  color: var(--color-navy);
   font-size: 18px;
   font-weight: 500;
 }
 
-/* セクション */
+/* 共通セクション */
+
 section {
   margin-bottom: 24px;
   padding: 24px;
-  background: white;
+  background: var(--color-white);
   border: 1px solid #deded9;
 }
 
@@ -134,22 +155,31 @@ section p {
   font-size: 14px;
 }
 
-/* HOME：物品情報ボックス */
+/* HOME：コンテンツ */
+
+.home-main {
+  width: 88%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .item-info {
   margin: 20px 0;
   padding: 20px 24px;
-  background: #fff;
-  border: 1px solid #d5d9dc;
-  border-left: 3px solid #263b50;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-navy);
   border-radius: 2px;
-  color: #333b42;
+  color: var(--color-text);
   font-size: 14px;
   line-height: 2;
 }
 
-/* HOME：リンク */
+/* メイン内のリンク */
+
 main a {
-  color: #263b50;
+  color: var(--color-navy);
   text-underline-offset: 3px;
 }
 
@@ -158,12 +188,13 @@ main a:hover {
 }
 
 /* フッター */
+
 footer {
   display: flex;
   justify-content: space-between;
   gap: 16px;
   padding: 22px 6%;
-  background: #263b50;
+  background: var(--color-navy);
   color: #d5dce3;
   font-size: 11px;
 }
@@ -173,6 +204,7 @@ footer {
 }
 
 /* ARCHIVE：物品照会システム */
+
 .archive-main {
   max-width: 760px;
 }
@@ -189,20 +221,20 @@ footer {
 
 .archive-label {
   margin: 0 0 4px;
-  color: #737b82;
+  color: var(--color-muted);
   font-size: 10px;
   letter-spacing: 0.14em;
 }
 
 .archive-title h3 {
   margin: 0;
-  color: #263b50;
+  color: var(--color-navy);
   font-size: 20px;
   font-weight: 500;
 }
 
 .archive-number {
-  color: #737b82;
+  color: var(--color-muted);
   font-size: 10px;
   white-space: nowrap;
 }
@@ -213,9 +245,10 @@ footer {
 }
 
 /* シリアルコード入力フォーム */
+
 .serial-form {
   padding: 24px;
-  background: #fff;
+  background: var(--color-white);
   border: 1px solid #d8dcd9;
   border-radius: 3px;
 }
@@ -223,14 +256,14 @@ footer {
 .serial-label {
   display: block;
   margin-bottom: 12px;
-  color: #737b82;
+  color: var(--color-muted);
   font-size: 11px;
   letter-spacing: 0.12em;
 }
 
 .serial-inputs {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -241,8 +274,8 @@ footer {
   padding: 8px 2px;
   border: 1px solid #c5cbd0;
   border-radius: 2px;
-  background: #fff;
-  color: #263b50;
+  background: var(--color-white);
+  color: var(--color-navy);
   font-family: monospace;
   font-size: 20px;
   text-align: center;
@@ -257,18 +290,19 @@ footer {
 }
 
 .serial-part:focus {
-  outline: 2px solid #263b50;
+  outline: 2px solid var(--color-navy);
   outline-offset: 1px;
-  border-color: #263b50;
+  border-color: var(--color-navy);
 }
 
 .serial-format {
   margin: 12px 0 22px;
-  color: #737b82;
+  color: var(--color-muted);
   font-size: 11px;
 }
 
 /* 照会ボタン */
+
 #serial-form button {
   display: block;
   width: 100%;
@@ -277,8 +311,8 @@ footer {
   padding: 12px 20px;
   border: 0;
   border-radius: 2px;
-  background: #263b50;
-  color: #fff;
+  background: var(--color-navy);
+  color: var(--color-white);
   font-size: 14px;
   letter-spacing: 0.06em;
   cursor: pointer;
@@ -290,15 +324,12 @@ footer {
 }
 
 #serial-form button:hover {
-  background: #354e67;
+  background: var(--color-navy-hover);
 }
 
-#serial-form button span {
-  margin-left: 8px;
-}
-
-#serial-form button:hover {
-  background: #354e67;
+#serial-form button:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
 }
 
 #serial-message {
@@ -307,6 +338,7 @@ footer {
 }
 
 /* 照会に関する案内 */
+
 .archive-notice {
   margin-top: 22px;
   padding: 14px 16px;
@@ -327,7 +359,57 @@ footer {
   line-height: 1.7;
 }
 
+/* SHOP：販売部門 */
+
+.shop-main {
+  max-width: 760px;
+}
+
+.shop-status {
+  margin-top: 28px;
+  padding: 28px 24px;
+  background: var(--color-white);
+  border: 1px solid #d8dcd9;
+  border-left: 3px solid var(--color-navy);
+  border-radius: 2px;
+}
+
+.shop-status-label {
+  margin: 0 0 8px;
+  color: var(--color-muted);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+
+.shop-status h3 {
+  margin: 0 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.shop-status-message {
+  margin: 0;
+  color: #5c646a;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.shop-status-info {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid #e0e2df;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.shop-status-info p {
+  margin: 4px 0;
+}
+
 /* スマートフォン対応 */
+
 @media (max-width: 600px) {
   header {
     padding: 22px 5%;
@@ -337,19 +419,10 @@ footer {
     font-size: 23px;
   }
 
-  nav {
-    padding: 0 1%;
-  }
-
   nav a {
     min-height: 48px;
     font-size: 10px;
     letter-spacing: 0;
-  }
-
-  nav::after {
-    left: 1%;
-    width: 19.6%;
   }
 
   main {
@@ -357,18 +430,20 @@ footer {
     padding: 32px 0 48px;
   }
 
+  .home-main {
+    width: 90%;
+  }
+
   .page-heading h2 {
     font-size: 23px;
   }
 
-  /* HOME */
   .item-info {
     padding: 16px;
   }
 
-  /* ARCHIVE */
   .archive-title {
-    align-items: start;
+    align-items: flex-start;
     flex-direction: column;
     gap: 6px;
   }
@@ -386,63 +461,6 @@ footer {
     font-size: 16px;
   }
 
-  /* フッター */
-  footer {
-    flex-direction: column;
-    gap: 4px;
-  }
-}
-
-
-/* SHOP：販売部門閉鎖案内 */
-.shop-main {
-  max-width: 760px;
-}
-
-.shop-status {
-  margin-top: 28px;
-  padding: 28px 24px;
-  background: #fff;
-  border: 1px solid #d8dcd9;
-  border-left: 3px solid #263b50;
-  border-radius: 2px;
-}
-
-.shop-status-label {
-  margin: 0 0 8px;
-  color: #737b82;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-}
-
-.shop-status h3 {
-  margin: 0 0 18px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #d5d9dc;
-  font-size: 23px;
-  font-weight: 500;
-}
-
-.shop-status-message {
-  margin: 0;
-  color: #5c646a;
-  font-size: 14px;
-  line-height: 2;
-}
-
-.shop-status-info {
-  margin-top: 24px;
-  padding-top: 14px;
-  border-top: 1px solid #e0e2df;
-  color: #737b82;
-  font-size: 12px;
-}
-
-.shop-status-info p {
-  margin: 4px 0;
-}
-
-@media (max-width: 600px) {
   .shop-status {
     padding: 22px 16px;
   }
@@ -450,19 +468,9 @@ footer {
   .shop-status h3 {
     font-size: 21px;
   }
-}
 
-
-/* HOME：コンテンツ幅を調整 */
-.home-main {
-  width: 88%;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-/* SHOP：ナビゲーションの横線 */
-body:has(a.active[href="shop.html"]) nav {
-  --active-index: 3;
+  footer {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
