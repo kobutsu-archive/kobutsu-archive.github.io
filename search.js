@@ -1,4 +1,4 @@
-
+console.log("search.js 読み込み成功");
 (() => {
   /* ナビゲーション制御 */
   const nav = document.querySelector("nav");
