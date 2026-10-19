@@ -1,64 +1,130 @@
-```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="古物流通公社のお問い合わせ窓口です。">
   <title>CONTACT | 古物流通公社</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <!-- ヘッダー -->
   <header>
-    <p>お問い合わせ・連絡窓口</p>
+    <p>物品管理・流通情報</p>
     <h1>古物流通公社</h1>
-    <nav>
-      <a href="index.html">HOME</a>
-      <a href="about.html">ABOUT</a>
-      <a href="archive.html">ARCHIVE</a>
-      <a href="shop.html">SHOP</a>
-      <a href="contact.html">CONTACT</a>
-    </nav>
   </header>
 
-  <main>
-    <section class="page-intro">
-      <h2>CONTACT</h2>
-      <p>お問い合わせ</p>
-    </section>
+  <!-- ナビゲーション -->
+  <nav aria-label="メインナビゲーション">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="archive.html">ARCHIVE</a>
+    <a href="shop.html">SHOP</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
 
-    <section class="archive-notice">
+  <!-- メインコンテンツ -->
+  <main>
+    <div class="page-heading">
+      <p>CONTACT / INQUIRIES</p>
+      <h2>お問い合わせ</h2>
+    </div>
+
+    <section>
       <h3>お問い合わせ窓口</h3>
       <p>
-        古物流通公社の管理物品および登録情報に関するお問い合わせは、
-        下記窓口までご連絡ください。
+        古物流通公社の管理物品および登録情報に関するお問い合わせについては、
+        本窓口をご確認ください。
       </p>
       <p>
-        なお、すべてのお問い合わせに回答できるとは限りません。
+        お問い合わせの内容によっては、回答できない場合があります。
         あらかじめご了承ください。
       </p>
     </section>
 
     <section>
       <h3>お問い合わせに関する注意事項</h3>
-      <ul>
-        <li>物品の照会には、該当するシリアルコードをご確認ください。</li>
-        <li>登録情報に関するお問い合わせは、対象物品を明記してください。</li>
-        <li>内容によっては回答を差し控える場合があります。</li>
-      </ul>
+      <p>
+        物品に関するお問い合わせの際は、対象物品のシリアルコードを
+        あらかじめご確認ください。
+      </p>
+      <p>
+        登録情報の取り扱いについては、当公社の規定に基づき対応いたします。
+      </p>
     </section>
 
     <section>
-      <h3>連絡先</h3>
-      <p>古物流通公社　管理部</p>
+      <h3>受付情報</h3>
+      <p>担当部署：管理部</p>
       <p>受付時間：平日 9:00〜17:00</p>
-      <p>※本ページは案内用です。実際の連絡先は現在設定されていません。</p>
+      <p>※現在、オンラインでのお問い合わせ受付には対応しておりません。</p>
     </section>
   </main>
 
+  <!-- フッター -->
   <footer>
-    <p>© 古物流通公社</p>
+    <div>Created by ogu²</div>
+    <div class="fiction-note">This is a fictional project.</div>
   </footer>
+
+  <!-- ナビゲーション制御 -->
+  <script>
+    (() => {
+      const nav = document.querySelector("nav");
+      if (!nav) return;
+
+      const links = [...nav.querySelectorAll("a")];
+
+      const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+
+      const foundIndex = links.findIndex(
+        link => link.getAttribute("href") === currentPage
+      );
+
+      const currentIndex = foundIndex >= 0 ? foundIndex : 0;
+
+      links.forEach((link, index) => {
+        const isCurrentPage = index === currentIndex;
+
+        link.classList.toggle("active", isCurrentPage);
+
+        if (isCurrentPage) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      function highlightLink(index) {
+        nav.style.setProperty("--active-index", index);
+      }
+
+      function resetHighlight() {
+        nav.style.setProperty("--active-index", currentIndex);
+      }
+
+      resetHighlight();
+
+      links.forEach((link, index) => {
+        link.addEventListener("mouseenter", () => {
+          highlightLink(index);
+        });
+
+        link.addEventListener("focus", () => {
+          highlightLink(index);
+        });
+      });
+
+      nav.addEventListener("mouseleave", resetHighlight);
+
+      nav.addEventListener("focusout", event => {
+        if (!nav.contains(event.relatedTarget)) {
+          resetHighlight();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
-```
