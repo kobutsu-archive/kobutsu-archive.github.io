@@ -451,3 +451,12 @@ footer {
     font-size: 21px;
   }
 }
+
+
+/* HOME：コンテンツ幅を調整 */
+.home-main {
+  width: 88%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
