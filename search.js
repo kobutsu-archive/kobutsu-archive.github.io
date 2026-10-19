@@ -110,14 +110,54 @@
     });
   });
 
-  /* 照会処理：現在は仮動作 */
-  form.addEventListener("submit", event => {
-    event.preventDefault();
+  
+/* 照会処理 */
+form.addEventListener("submit", event => {
+  event.preventDefault();
 
-    const code = parts
-      .map(input => input.value)
-      .join("-");
+  const code = parts
+    .map(input => input.value.trim().toUpperCase())
+    .join("-");
 
-    message.textContent = "照会システム未接続：" + code;
-  });
-})();
+  const item = items[code];
+  const result = document.getElementById("item-result");
+
+  if (!item) {
+    message.textContent = "該当する物品情報は確認できませんでした。";
+    if (result) result.hidden = true;
+    return;
+  }
+
+  message.textContent = "物品情報が確認されました。";
+
+  if (!result) {
+    const resultArea = document.createElement("section");
+    resultArea.id = "item-result";
+    resultArea.className = "archive-notice";
+    resultArea.setAttribute("aria-live", "polite");
+    form.insertAdjacentElement("afterend", resultArea);
+  }
+
+  const resultArea = document.getElementById("item-result");
+
+  resultArea.replaceChildren();
+
+  const heading = document.createElement("h3");
+  heading.textContent = "照会結果";
+
+  const name = document.createElement("p");
+  name.textContent = "物品名：" + item.name;
+
+  const category = document.createElement("p");
+  category.textContent = "分類：" + item.category;
+
+  const status = document.createElement("p");
+  status.textContent = "登録状態：" + item.status;
+
+  const description = document.createElement("p");
+  description.textContent = "詳細：" + item.description;
+
+  resultArea.append(heading, name, category, status, description);
+  resultArea.hidden = false;
+});
+
