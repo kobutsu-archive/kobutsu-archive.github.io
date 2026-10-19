@@ -460,3 +460,9 @@ footer {
   margin-left: auto;
   margin-right: auto;
 }
+
+
+/* SHOP：ナビゲーションの横線 */
+body:has(a.active[href="shop.html"]) nav {
+  --active-index: 3;
+}
