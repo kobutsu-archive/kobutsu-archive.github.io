@@ -152,11 +152,17 @@ form.addEventListener("submit", event => {
   const category = document.createElement("p");
   category.textContent = "分類：" + item.category;
 
-  const status = document.createElement("p");
-  status.textContent = "登録状態：" + item.status;
+  const collectionDate = document.createElement("p");
+  collectionDate.textContent = "収集日時：" + item.collectionDate;
 
-  const description = document.createElement("p");
-  description.textContent = "詳細：" + item.description;
+  const condition = document.createElement("p");
+  condition.textContent = "保存状態：" + item.condition;
+
+  const status = document.createElement("p");
+  status.textContent = "管理状態：" + item.status;
+
+  const notes = document.createElement("p");
+  notes.textContent = "備考：" + item.notes;
 
   resultArea.append(heading, name, category, status, description);
   resultArea.hidden = false;
